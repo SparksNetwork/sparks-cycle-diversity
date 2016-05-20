@@ -7,7 +7,7 @@ const imagePath = path.resolve('./dist/images')
 
 const basePlugins =
   [
-    new webpack.EnvironmentPlugin([ 'BUILD_ENV' ]),
+    new webpack.EnvironmentPlugin([ 'BUILD_ENV', 'FIREBASE_URL', 'FIREBASE_API_KEY', 'AUTH_DOMAIN', 'STORAGE_BUCKET' ]),
     new ExtractTextPlugin('style.css', { allChunks: true })
   ]
 
