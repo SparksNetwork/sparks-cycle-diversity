@@ -29,7 +29,8 @@ function ComponentRouter (sources) {
     pluck: key => component$.map(prop(key)).flatten(),
     DOM: component$.map(prop('DOM')).flatten(),
     route$: component$.map(prop('route$')).flatten(),
-    auth$: component$.map(prop('auth$')).flatten()
+    auth$: component$.map(prop('auth$')).flatten(),
+    queue$: component$.map(prop('queue$')).flatten()
   }
 }
 

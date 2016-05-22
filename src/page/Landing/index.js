@@ -37,9 +37,18 @@ function Landing ({DOM, auth$}) {
   const view$ = auth$.startWith(undefined)
     .map(ifElse(identity, loggedInView, loggedOutView))
 
+  const queue$ = auth$
+    .filter(identity)
+    .map(user => ({
+      domain: 'Profiles',
+      action: 'create',
+      ...user.providerData[0]
+    }))
+
   return {
     DOM: view$,
-    auth$: xs.merge(login$, logout$)
+    auth$: xs.merge(login$, logout$),
+    queue$
   }
 }
 

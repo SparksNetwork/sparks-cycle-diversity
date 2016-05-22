@@ -39,7 +39,7 @@ const drivers =
     router: makeRouterDriver(...history),
     firebase: makeFirebaseDriver(firebase.database().ref()),
     auth$: makeAuthDriver(firebase.auth()),
-    queue$: makeQueueDriver(firebase.database().ref())
+    queue$: makeQueueDriver(firebase.database().ref().child('!queue'))
   }
 
 const dispose = Cycle.run(main, drivers)
