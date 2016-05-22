@@ -1,0 +1,35 @@
+machine:
+  node:
+    version: 6.2.0
+
+notify:
+  webhooks:
+    - url: https://hooks.slack.com/services/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
+
+test:
+  pre:
+    - BUILD_ENV=production npm run build
+    - npm run tunnels:
+        background: true
+  override:
+    - MOCHA_FILE=./${CIRCLE_ARTIFACTS}/test-results.xml npm run cbt
+
+general:
+  artifacts:
+    - ./${CIRCLE_ARTIFACTS}
+    - ./coverage
+    - ./tests_output
+    - ./test-results.xml
+
+# When you're ready for this stuff :)
+#deployment:
+#  production:
+#    branch: master
+#    commands:
+#      - BABEL_ENV=production BUILD_ENV=production npm run build
+#      - surge ./dist http://example.com
+#  staging:
+#    branch: release
+#    commands:
+#      - BABEL_ENV=production BUILD_ENV=staging npm run build
+#      - surge ./dist http://example.com

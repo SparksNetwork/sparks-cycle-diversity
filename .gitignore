@@ -31,3 +31,15 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+report
+.tmp
+test-results.xml
+dist/bundle.js
+tests_output
+screens
+${CIRCLE_ARTIFACTS}
+.local
+*.local.*
+CBT_READY
+CBT_KILL
