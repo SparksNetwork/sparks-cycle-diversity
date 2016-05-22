@@ -38,23 +38,27 @@ export const makeAuthDriver = auth => {
     [LOGOUT]: prov => auth.signOut()
   }
 
+  auth.onAuthStateChanged(info => {
+    console.log('auth state change', info)
+  })
+
   function authDriver (input$, runStreamAdapter) {
+    let authStateUnsubscribe
+
     return xs.createWithMemory({
       start: l => {
+        authStateUnsubscribe = auth.onAuthStateChanged(
+          user => l.next(user),
+          err => l.error(err)
+        )
+
         input$.addListener({
-          next: ({type, provider}) => {
-            console.log(type, provider)
-            actionMap[type](provider)
-              .then(result => l.next(result))
-              .catch(err => l.error(err))
-          },
-          error: err => {
-            console.error(err)
-          },
+          next: ({type, provider}) => actionMap[type](provider),
+          error: err => l.error(err),
           complete: () => {}
         })
       },
-      stop: () => {}
+      stop: () => authStateUnsubscribe && authStateUnsubscribe()
     })
   }
 

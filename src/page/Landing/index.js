@@ -27,7 +27,7 @@ function Landing ({DOM, auth$}) {
     button('.google-login', 'Login with Google')
   ]))
 
-  const loggedInView = ({user}) => div([
+  const loggedInView = (user) => div([
     div('.logged-in', `Logged in as ${user.email}`),
     div([
       button('.google-logout', {polyglot: {phrase: 'logout', name: 'Logout'}})
