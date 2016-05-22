@@ -29,8 +29,8 @@
     "test": "npm run lint && npm run unit-test && npm run e2e-test",
     "test-ci": "npm run lint && npm run coverage && npm run cbt",
     "serve-static": "pushstate-server dist/ 8080 /200.html",
-    "serve": "webpack-dev-server",
-    "build": "webpack"
+    "serve": "cross-env babel-node ./node_modules/.bin/webpack-dev-server",
+    "build": "cross-env babel-node ./node_modules/.bin/webpack"
   },
   "config": {
     "commitizen": {
