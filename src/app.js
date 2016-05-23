@@ -7,6 +7,17 @@ import {createHistory, createHashHistory} from 'history'
 
 // Local imports
 import main from 'page/main'
+import {makePolyglotModule} from 'module/polyglot'
+import {translations} from 'translation'
+
+const modules =
+  [
+    require('snabbdom/modules/class'),
+    require('snabbdom/modules/props'),
+    require('snabbdom/modules/attributes'),
+    require('snabbdom/modules/style'),
+    makePolyglotModule(translations)
+  ]
 
 const history = supportsHistory()
   ? [createHistory(), {capture: true}]
@@ -14,7 +25,7 @@ const history = supportsHistory()
 
 const drivers =
   {
-    DOM: makeDOMDriver('#app', {transposition: false}),
+    DOM: makeDOMDriver('#app', {transposition: false, modules}),
     router: makeRouterDriver(...history)
   }
 

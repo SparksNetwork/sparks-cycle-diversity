@@ -102,8 +102,10 @@ module.exports = {
     alias: {
       component: srcPath + '/component',
       driver: srcPath + '/driver',
+      module: srcPath + '/module',
       page: srcPath + '/page',
       util: srcPath + '/util',
+      translation: srcPath + '/translation',
       images: imagePath
     }
   }
