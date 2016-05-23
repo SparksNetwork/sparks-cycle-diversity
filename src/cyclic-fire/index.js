@@ -19,7 +19,7 @@ const FirebaseStream = (ref, evtName) =>
 
 const ValueStream = ref => FirebaseStream(ref, 'value')
   .map(({val}) => val)
-  .memory()
+  .remember()
 
 const ChildAddedStream = ref => FirebaseStream(ref, 'child_added')
 
