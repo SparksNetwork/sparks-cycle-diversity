@@ -10,7 +10,7 @@ describe('Landing page', () => {
       .url(URL)
       .waitForElementVisible('body', 3000)
       .pause(2000)
-      .assert.containsText('.welcome', 'Cycle.js Diversity XStream Boilerplate')
+      .assert.containsText('.welcome', 'Welcome to the Sparks.Network')
       .end()
   })
 })
