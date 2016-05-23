@@ -16,9 +16,13 @@ const prodPlugins =
     new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
 
+const devPlugins =
+  [
+  ]
+
 const plugins = process.env.BUILD_ENV === 'production'
   ? basePlugins.concat(prodPlugins)
-  : basePlugins
+  : basePlugins.concat(devPlugins)
 
 const JSLoader = {
   test: /\.js$/,
@@ -57,8 +61,18 @@ const ImageLoader = {
   ]
 }
 
+const environmentOptions =
+  process.env.BUILD_ENV === 'production'
+  ? { }
+  : {
+    debug: true,
+    devtool: 'source-map'
+  }
+
 module.exports = {
   plugins,
+
+  ...environmentOptions,
 
   entry: [
     path.join(srcPath, 'app.js')
@@ -93,5 +107,4 @@ module.exports = {
       images: imagePath
     }
   }
-
 }
