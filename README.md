@@ -24,3 +24,15 @@ Feel free to contact any of the following
 
   - [Steve DeBaun](mailto://sdebaun@sparks.network)
   - [Tylor Steinberger](mailto://tsteinberger@sparks.network)
+
+## Getting started
+
+To run in development mode:
+
+```
+FIREBASE_URL=https://....firebaseio.com \
+FIREBASE_API_KEY=123abc \
+AUTH_DOMAIN=....firebaseapp.com \
+STORAGE_BUCKET=....appspot.com \
+npm run serve
+```
