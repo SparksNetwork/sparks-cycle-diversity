@@ -9,6 +9,23 @@ export function requireSources (componentName, sources, ...sourcesNames) {
   }, sourcesNames)
 }
 
+export function subscribe (fn) {
+  const listener = {
+    next: item => fn(item),
+    error: () => {},
+    complete: () => {}
+  }
+
+  return stream => {
+    stream.addListener(listener)
+    return () => stream.removeListener(listener)
+  }
+}
+
+export function logStream (stream) {
+  return subscribe(item => console.log(item))(stream)
+}
+
 export function isStream (stream) {
   return stream instanceof Stream
 }

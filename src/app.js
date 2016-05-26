@@ -5,7 +5,17 @@ import {makeDOMDriver} from '@cycle/dom'
 import {makeRouterDriver, supportsHistory} from 'cyclic-router'
 import {createHistory, createHashHistory} from 'history'
 
-// Local imports
+import firebase from 'firebase'
+
+const fbConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_URL,
+  storageBucket: process.env.STORAGE_BUCKET
+}
+firebase.initializeApp(fbConfig)
+
+import {makeAuthDriver, makeFirebaseDriver, makeQueueDriver} from './cyclic-fire'
 import main from 'page/main'
 import {makePolyglotModule} from 'module/polyglot'
 import {translations} from 'translation'
@@ -26,7 +36,10 @@ const history = supportsHistory()
 const drivers =
   {
     DOM: makeDOMDriver('#app', {transposition: false, modules}),
-    router: makeRouterDriver(...history)
+    router: makeRouterDriver(...history),
+    firebase: makeFirebaseDriver(firebase.database().ref()),
+    auth$: makeAuthDriver(firebase.auth()),
+    queue$: makeQueueDriver(firebase.database().ref().child('!queue'))
   }
 
 const dispose = Cycle.run(main, drivers)

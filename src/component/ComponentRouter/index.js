@@ -23,11 +23,14 @@ function ComponentRouter (sources) {
     .map(routes => sources.router.define(routes)).flatten()
     .compose(dropRepeats(equalPaths)) // dont render the same page twice in a row
     .map(callComponent(sources))
+    .remember()
 
   return {
     pluck: key => component$.map(prop(key)).flatten(),
     DOM: component$.map(prop('DOM')).flatten(),
-    route$: component$.map(prop('route$')).flatten()
+    route$: component$.map(prop('route$')).flatten(),
+    auth$: component$.map(prop('auth$')).flatten(),
+    queue$: component$.map(prop('queue$')).flatten()
   }
 }
 
