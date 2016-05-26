@@ -41,7 +41,7 @@
     }
   },
   "dependencies": {
-    "@cycle/dom": "^10.0.0-rc21",
+    "@cycle/dom": "^10.0.0-rc22",
     "@cycle/isolate": "^1.2.1",
     "@cycle/xstream-run": "^1.1.0",
     "attr-accept": "^1.0.3",
