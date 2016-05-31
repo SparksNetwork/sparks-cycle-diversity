@@ -17,7 +17,7 @@ describe('Logging in with Firebase', () => {
 
   it('should display a log out button after loggin in', (browser) => {
     browser
-      .pause(200)
+      .pause(2000)
       .assert.containsText('.google-logout', 'logout')
   })
 })
