@@ -1,0 +1,25 @@
+@keyframes anim-rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+	}
+}
+
+.spinner {
+  animation: anim-rotate 2s infinite linear;
+  color: #000;
+  display: block;
+  font-size: 4em;
+  line-height: 4em;
+  text-shadow: 0 0 .25em rgba(255,255,255, .3);
+  margin: 0;
+  padding: 0;
+}
+
+.loader {
+  margin: 0 auto;
+  width: 4em;
+}

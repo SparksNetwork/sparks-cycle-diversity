@@ -1,7 +1,10 @@
 {
   "extends": "eslint-config-standard",
   "rules": {
+    "quotes": [2, "single"],
     "padded-blocks": 0,
-    "brace-style": 0
+    "brace-style": 0,
+    "no-class/no-class": 0,
+    "comma-dangle": [2, "always-multiline"]
   }
 }

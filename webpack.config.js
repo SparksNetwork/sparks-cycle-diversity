@@ -4,16 +4,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const srcPath = path.resolve('./src')
 const imagePath = path.resolve('./dist/images')
+const vendorPath = path.resolve('./vendor')
 
 const basePlugins =
   [
     new webpack.EnvironmentPlugin([ 'BUILD_ENV', 'FIREBASE_URL', 'FIREBASE_API_KEY', 'AUTH_DOMAIN', 'STORAGE_BUCKET' ]),
-    new ExtractTextPlugin('style.css', { allChunks: true })
+    new ExtractTextPlugin('styles.css', { allChunks: true }),
   ]
 
 const prodPlugins =
   [
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
   ]
 
 const devPlugins =
@@ -28,10 +29,10 @@ const JSLoader = {
   test: /\.js$/,
   loaders: [
     'babel-loader',
-    'eslint'
+    'eslint',
   ],
   include: __dirname,
-  exclude: /node_modules/
+  exclude: /node_modules/,
 }
 
 const SASSLoader = {
@@ -41,7 +42,7 @@ const SASSLoader = {
     'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' +
     '!postcss-loader' +
     '!sass-loader?outputStyle=expanded'
-  )
+  ),
 }
 
 const CSSLoader = {
@@ -50,15 +51,15 @@ const CSSLoader = {
     'style-loader',
     'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' +
     '!postcss-loader'
-  )
+  ),
 }
 
 const ImageLoader = {
   test: /\.(jpe?g|png|gif|svg)$/i,
   loaders: [
     'file?hash=sha512&digest=hex&name=[hash].[ext]',
-    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-  ]
+    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
+  ],
 }
 
 const environmentOptions =
@@ -66,7 +67,7 @@ const environmentOptions =
   ? { }
   : {
     debug: true,
-    devtool: 'source-map'
+    devtool: 'source-map',
   }
 
 module.exports = {
@@ -75,18 +76,19 @@ module.exports = {
   ...environmentOptions,
 
   entry: [
-    path.join(srcPath, 'app.js')
+    path.join(srcPath, 'app.js'),
+    path.join(srcPath, 'scss', 'global.scss'),
   ],
 
   output: {
     path: path.resolve('./dist'),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:8080/'
+    publicPath: 'http://localhost:8080/',
   },
 
   devServer: {
     contentBase: path.resolve('./dist'),
-    historyApiFallback: true
+    historyApiFallback: true,
   },
 
   module: {
@@ -94,8 +96,8 @@ module.exports = {
       JSLoader,
       SASSLoader,
       CSSLoader,
-      ImageLoader
-    ]
+      ImageLoader,
+    ],
   },
 
   resolve: {
@@ -105,8 +107,10 @@ module.exports = {
       module: srcPath + '/module',
       page: srcPath + '/page',
       util: srcPath + '/util',
+      remote: srcPath + '/remote',
       translation: srcPath + '/translation',
-      images: imagePath
-    }
-  }
+      images: imagePath,
+      surface: vendorPath + '/surface',
+    },
+  },
 }

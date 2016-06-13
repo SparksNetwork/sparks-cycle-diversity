@@ -24,14 +24,14 @@ function Landing ({DOM, auth$}) {
 
   const loggedOutView = always(div([
     h1('.welcome', 'Sparks.Network'),
-    button('.google-login', 'Login with Google')
+    button('.google-login', 'Login with Google'),
   ]))
 
   const loggedInView = (user) => div([
     div('.logged-in', `Logged in as ${user.providerData[0].email}`),
     div([
-      button('.google-logout', {polyglot: {phrase: 'logout', name: 'Logout'}})
-    ])
+      button('.google-logout', {polyglot: {phrase: 'logout', name: 'Logout'}}),
+    ]),
   ])
 
   const view$ = auth$.startWith(undefined)
@@ -42,13 +42,13 @@ function Landing ({DOM, auth$}) {
     .map(user => ({
       domain: 'Profiles',
       action: 'create',
-      ...user.providerData[0]
+      ...user.providerData[0],
     }))
 
   return {
     DOM: view$,
     auth$: xs.merge(login$, logout$),
-    queue$
+    queue$,
   }
 }
 

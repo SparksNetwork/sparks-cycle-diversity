@@ -14,6 +14,6 @@ export function makePolyglotModule (translations) {
 
   return {
     create: internationlizeTextContent,
-    update: internationlizeTextContent
+    update: internationlizeTextContent,
   }
 }

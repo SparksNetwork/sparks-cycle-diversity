@@ -11,7 +11,7 @@ const fbConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
   databaseURL: process.env.FIREBASE_URL,
-  storageBucket: process.env.STORAGE_BUCKET
+  storageBucket: process.env.STORAGE_BUCKET,
 }
 firebase.initializeApp(fbConfig)
 
@@ -26,7 +26,7 @@ const modules =
     require('snabbdom/modules/props'),
     require('snabbdom/modules/attributes'),
     require('snabbdom/modules/style'),
-    makePolyglotModule(translations)
+    makePolyglotModule(translations),
   ]
 
 const history = supportsHistory()
@@ -39,7 +39,7 @@ const drivers =
     router: makeRouterDriver(...history),
     firebase: makeFirebaseDriver(firebase.database().ref()),
     auth$: makeAuthDriver(firebase.auth()),
-    queue$: makeQueueDriver(firebase.database().ref().child('!queue'))
+    queue$: makeQueueDriver(firebase.database().ref().child('!queue')),
   }
 
 const dispose = Cycle.run(main, drivers)

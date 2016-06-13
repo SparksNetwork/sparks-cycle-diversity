@@ -1,0 +1,39 @@
+@keyframes anim-rotate {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner {
+  position: absolute;
+	font-size:1em;
+	height: 1em;
+	line-height: 1;
+	animation: anim-rotate 2s infinite linear;
+	color: #fff;
+	text-shadow: 0 0 .25em rgba(255,255,255, .3);
+  top: 50%;
+  left: 50%;
+  margin-top: -0.8em;
+  margin-left: -0.5em;
+}
+
+.loader {
+  :global(.icon-spinner) { display: none; }
+  display: inline-block;
+  position: relative;
+}
+
+.loading {
+  :global(.icon-spinner) {
+    display: block;
+  }
+
+  button {
+    text-opacity: 0.3;
+  }
+}
+

@@ -12,7 +12,7 @@ export const LOGOUT = 'logout'
 const FirebaseStream = (ref, evtName) =>
   xs.create({
     start: obs => ref.on(evtName, snap => obs.next(snap)),
-    stop: () => ref.off(evtName)
+    stop: () => ref.off(evtName),
   })
   .map(snap => ({key: snap.key, val: snap.val()}))
   .compose(dropRepeats())
@@ -35,7 +35,7 @@ export const makeAuthDriver = auth => {
   const actionMap = {
     [POPUP]: prov => auth.signInWithPopup(prov),
     [REDIRECT]: prov => auth.signInWithRedirect(prov),
-    [LOGOUT]: prov => auth.signOut()
+    [LOGOUT]: prov => auth.signOut(),
   }
 
   auth.onAuthStateChanged(info => {
@@ -55,10 +55,10 @@ export const makeAuthDriver = auth => {
         input$.addListener({
           next: ({type, provider}) => actionMap[type](provider),
           error: err => l.error(err),
-          complete: () => {}
+          complete: () => {},
         })
       },
-      stop: () => authStateUnsubscribe && authStateUnsubscribe()
+      stop: () => authStateUnsubscribe && authStateUnsubscribe(),
     })
   }
 
@@ -119,7 +119,7 @@ export const makeQueueDriver = (ref, src = 'responses', dest = 'tasks') => {
     inputDebug$.addListener({
       next: item => destRef.push(item),
       error: () => {},
-      complete: () => {}
+      complete: () => {},
     })
 
     return listenerKey =>

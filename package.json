@@ -47,6 +47,7 @@
     "attr-accept": "^1.0.3",
     "braintree-web": "^2.24.1",
     "cropperjs": "^0.7.0",
+    "css-loader": "^0.23.1",
     "cyclic-router": "^2.0.0",
     "es6-shim": "^0.35.1",
     "firebase": "^3.0.2",
@@ -54,6 +55,7 @@
     "node-polyglot": "^2.0.0",
     "normalize-css": "^2.3.1",
     "ramda": "^0.21.0",
+    "sass-loader": "^3.2.0",
     "xstream": "^2.4.3"
   },
   "devDependencies": {
