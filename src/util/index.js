@@ -70,7 +70,7 @@ export function combine (...streamsOrArrays) {
     return items
   }
 
-  return xs.combine(mapper, ...streams)
+  return xs.combine(...streams)
 }
 
 /**

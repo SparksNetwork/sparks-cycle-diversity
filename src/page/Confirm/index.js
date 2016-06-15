@@ -1,3 +1,5 @@
+import xs from 'xstream'
+import delay from 'xstream/extra/delay'
 import {combine} from 'util'
 import {Profiles} from 'remote'
 
@@ -63,12 +65,14 @@ export default sources => {
   }).DOM
 
   const frameDOM = cardDOM.map(dom => SoloFrame(div(), dom)).remember()
+  // TODO: [JDW] why doesn't this stuff work without this listener!
+  sources.log('fd', frameDOM)
 
   const DOM = sources.userProfile$
-    .filter(not)
-    .mapTo(frameDOM)
-    .flatten()
-    .remember()
+   .filter(not)
+   .mapTo(frameDOM)
+   .flatten()
+   .remember()
 
   const router = sources.userProfile$
     .filter(Boolean)
