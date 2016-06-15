@@ -1,7 +1,21 @@
 @import '../../vendor/surface/_imports/reset';
 @import '../../vendor/surface/type';
 @import '../../vendor/surface/general';
+@import '../../vendor/surface/form';
 
 :global(#app) {
   width: 100%;
 }
+
+input {
+	&[type="email"], &[type="text"],
+	&[type="password"], &[type="textarea"] {
+	  width: 100%;
+	  background-position: 0 0;
+	  background-size: 0 100%;
+	  &:focus, &:valid {
+	    background-size: 100% 100%;
+    }
+  }
+}
+

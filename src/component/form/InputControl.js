@@ -2,7 +2,6 @@ import xs from 'xstream'
 import {combine} from 'util'
 import {div, input, label} from '@cycle/dom'
 import {path, always, objOf} from 'ramda'
-import styles from 'surface/form.scss'
 import custom from './input.scss'
 
 const InputControl = sources => {

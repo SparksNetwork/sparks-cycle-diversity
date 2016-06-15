@@ -66,10 +66,6 @@ export function combine (...streamsOrArrays) {
     streams = streamsOrArrays[0]
   }
 
-  const mapper = (...items) => {
-    return items
-  }
-
   return xs.combine(...streams)
 }
 

@@ -1,14 +1,2 @@
-input {
-	&[type="email"], &[type="text"],
-	&[type="password"], &[type="textarea"] {
-	  width: 100%;
-	  background-position: 0 0;
-	  background-size: 0 100%;
-	  &:focus, &:valid {
-	    background-size: 100% 100%;
-    }
-  }
-}
-
 .validated {
 }

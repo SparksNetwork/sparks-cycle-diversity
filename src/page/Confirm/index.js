@@ -1,5 +1,3 @@
-import xs from 'xstream'
-import delay from 'xstream/extra/delay'
 import {combine} from 'util'
 import {Profiles} from 'remote'
 
