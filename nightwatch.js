@@ -1,15 +1,9 @@
-const START_PROCESS = process.env.E2E !== 'CBT'
-
 module.exports = {
   src_folders: ['e2e'],
   output_folder: './report',
-  custom_commands_path: '',
-  custom_assertions_path: '',
-  page_objects_path: '',
-  globals_path: '',
 
   selenium: {
-    start_process: START_PROCESS,
+    start_process: process.env.LOCAL || false,
     server_path: 'node_modules/selenium-server/lib/runner/selenium-server-standalone-2.53.0.jar',
     log_path: '',
     host: '127.0.0.1',
@@ -47,7 +41,7 @@ module.exports = {
     },
 
     default: {
-      launch_url: 'http://ondemand.saucelabs.com:80',
+      launch_url: 'http://localhost',
       selenium_port: 80,
       selenium_host: 'ondemand.saucelabs.com',
       silent: true,
@@ -60,6 +54,22 @@ module.exports = {
       globals: {
         waitForConditionTimeout: 10000
       }
+    },
+
+    chrome: {
+      desiredCapabilities: {
+        name: 'OS X 10.11 Chrome',
+        browserName: 'chrome',
+        platform: 'OS X 10.11',
+        version: '49'
+      }
+    },
+
+    ie11: {
+      name: 'Windows 10 - IE11',
+      browserName: 'internet explorer',
+      platform: 'Windows 10',
+      version: '11.0'
     }
   }
 }
