@@ -1,3 +1,4 @@
+import fs from 'fs'
 import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -17,6 +18,23 @@ if (env === 'development') {
 }
 
 app.use(express.static('dist'))
+
+const compileHtml = () => {
+  const indexSource = fs.readFileSync('./dist/index.html',
+    {encoding: 'utf-8'})
+  return indexSource
+}
+
+const html = compileHtml()
+
+app.get('*', (req, res) => {
+  if (env === 'development') {
+    res.send(compileHtml())
+  } else {
+    res.send(html)
+  }
+})
+
 app.listen(port, () => console.log(`Listening on ${port}`))
 
 export default app
