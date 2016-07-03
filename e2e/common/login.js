@@ -5,19 +5,15 @@ export const PASSWORD = process.env.TEST_ACCOUNT_PASSWORD.trim()
 
 export function login (browser) {
   return browser.url(URL)
-    .waitForElementVisible('body')
-    .assert.visible('.google-login')
+    .waitForElementVisible('.google-login', Infinity)
     .click('.google-login')
-    .click('.google-login')
-    .window_handles(result => {
-      browser.switchWindow(result.value[1])
-        .waitForElementVisible('#Email')
-        .setValue('#Email', USERNAME)
-        .click('#next')
-        .waitForElementVisible('#Passwd')
-        .setValue('#Passwd', PASSWORD)
-        .click('#signIn')
-    })
+    .click('.google-login') // double click required for saucelabs to focus and actually click
+    .waitForElementVisible('#Email', Infinity)
+    .setValue('#Email', USERNAME)
+    .click('#next')
+    .waitForElementVisible('#Passwd')
+    .setValue('#Passwd', PASSWORD)
+    .click('#signIn')
     .window_handles(result => {
       browser.switchWindow(result.value[0])
     })

@@ -6,7 +6,9 @@ import {eqProps, prop} from 'ramda'
 import {requireSources} from 'util/index'
 
 const equalPaths = eqProps('path')
-const loading = div('.loading', 'Loading...')
+
+import styles from './index.scss'
+const loading = div('.' + styles.loading, {}, 'Loading...')
 
 const callComponent = sources => ({path, value}) => {
   const component = value({...sources, router: sources.router.path(path)})

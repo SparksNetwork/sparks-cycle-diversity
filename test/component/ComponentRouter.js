@@ -2,11 +2,12 @@ import {describe, it} from 'mocha'
 import assert from 'power-assert'
 import xs from 'xstream'
 import {mockDOMSource, h1} from '@cycle/dom'
+import XStreamAdapter from '@cycle/xstream-adapter'
 
 import ComponentRouter from 'component/ComponentRouter'
 
 // mocks
-const DOMSource = mockDOMSource({})
+const DOMSource = mockDOMSource(XStreamAdapter, {})
 const component = {
   DOM: xs.of(h1({}, 'Hello World')),
   route$: xs.of('/path')
@@ -35,7 +36,7 @@ describe('ComponentRouter', () => {
     // Test Loading page
     DOM.take(1).addListener({
       next: vNode => {
-        assert(vNode.sel === 'div.loading')
+        assert(vNode.sel.indexOf('div.index__loading__') > -1)
         assert(vNode.text === 'Loading...')
       },
       error: done,
@@ -66,7 +67,7 @@ describe('ComponentRouter', () => {
     // Test Loading page
     DOM.take(1).addListener({
       next: vNode => {
-        assert(vNode.sel === 'div.loading')
+        assert(vNode.sel.indexOf('div.index__loading__') > -1)
         assert(vNode.text === 'Loading...')
       },
       error: done,

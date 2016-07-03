@@ -17,7 +17,7 @@ function Landing ({DOM, auth$}) {
   )
 
   const login$ = intent$.filter(actionEq('login'))
-    .mapTo({type: 'popup', provider})
+    .mapTo({type: 'redirect', provider})
 
   const logout$ = intent$.filter(actionEq('logout'))
     .mapTo({type: 'logout', provider})
